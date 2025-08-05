@@ -1,7 +1,7 @@
-import fetch from 'node-fetch';
-import { decode } from 'html-entities';
+const fetch = require('node-fetch');
+const { decode } = require('html-entities');
 
-export class OpenAISummarizer {
+class OpenAISummarizer {
     constructor(apiKey) {
         this.apiKey = apiKey;
     }
@@ -28,11 +28,13 @@ export class OpenAISummarizer {
         }
 
         const data = await response.json();
-        return `要約 (OpenAI): ${data.choices[0].message.content.trim()}`;
+        return `OpenAIによる要約: ${data.choices[0].message.content.trim()}`;
+        // return `要約 (OpenAI): ${data.choices[0].message.content.trim()}`;
+        // return data.choices[0].message.content.trim();
     }
 }
 
-export class GeminiSummarizer {
+class GeminiSummarizer {
     constructor(apiKey) {
         this.apiKey = apiKey;
     }
@@ -42,8 +44,14 @@ export class GeminiSummarizer {
     }
 }
 
-export class BedrockSummarizer {
+class BedrockSummarizer {
     async summarize(content) {
         return `要約 (Bedrock): ${content.substring(0, 100)}...`;
     }
 }
+
+module.exports = {
+    OpenAISummarizer,
+    GeminiSummarizer,
+    BedrockSummarizer
+};

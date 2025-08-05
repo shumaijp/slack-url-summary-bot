@@ -1,17 +1,16 @@
 {
   "name": "slack-url-summary-bot",
   "version": "1.0.0",
-  "type": "module",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js"
   },
   "dependencies": {
     "@postlight/parser": "github:postlight/parser",
+    "aws-serverless-express": "^3.4.0",
     "body-parser": "^1.20.0",
     "express": "^4.18.0",
-    "node-fetch": "^3.3.0",
     "html-entities": "^2.3.3",
-    "aws-serverless-express": "^3.4.0"
+    "node-fetch": "^2.7.0"
   }
 }

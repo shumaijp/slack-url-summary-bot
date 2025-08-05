@@ -1,6 +1,6 @@
-import fetch from 'node-fetch';
+const fetch = require('node-fetch');
 
-export async function postToSlack({ channel, text }) {
+async function postToSlack({ channel, text }) {
     const token = process.env.SLACK_BOT_TOKEN;
     const response = await fetch('https://slack.com/api/chat.postMessage', {
         method: 'POST',
@@ -20,3 +20,7 @@ export async function postToSlack({ channel, text }) {
     }
     console.log(`Posted to Slack: ${text}`);
 }
+
+module.exports = {
+    postToSlack
+};

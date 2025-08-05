@@ -1,10 +1,9 @@
-import Mercury from '@postlight/parser';
+const Mercury = require('@postlight/parser');
 
-export class MercuryExtractor {
+class MercuryExtractor {
     async extract(url) {
         const result = await Mercury.parse(url);
         const contentText = result.content.replace(/<[^>]+>/g, '');
-        console.log(`Extracted Article: ${contentText}`);
         return {
             title: result.title,
             content: contentText,
@@ -14,13 +13,13 @@ export class MercuryExtractor {
     }
 }
 
-export class ReadabilityExtractor {
+class ReadabilityExtractor {
     async extract(url) {
         throw new Error('ReadabilityExtractor not implemented yet');
     }
 }
 
-export class DiffbotExtractor {
+class DiffbotExtractor {
     constructor(token) {
         this.token = token;
     }
@@ -29,3 +28,9 @@ export class DiffbotExtractor {
         throw new Error('DiffbotExtractor not implemented yet');
     }
 }
+
+module.exports = {
+    MercuryExtractor,
+    ReadabilityExtractor,
+    DiffbotExtractor
+};
