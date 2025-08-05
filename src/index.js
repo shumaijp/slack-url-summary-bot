@@ -22,9 +22,17 @@ function selectSummarizer() {
 }
 
 app.post('/webhook', async (req, res) => {
+    const { type, challenge, event } = req.body;
+
+    // Slack URL Verificationへの対応
+    if (type === 'url_verification') {
+        return res.status(200).send(challenge);
+    }
+
+    // 通常のイベント処理（URL投稿が来た時）
     try {
-        const url = req.body.url;
-        const channel = req.body.channel;
+        const url = event.text; // Slackからのイベントは eventオブジェクトに入っている
+        const channel = event.channel;
 
         const extractor = selectArticleExtractor();
         const summarizer = selectSummarizer();
@@ -42,3 +50,5 @@ app.post('/webhook', async (req, res) => {
 });
 
 app.listen(3000, () => console.log('Bot server running on port 3000'));
+
+export default app;
