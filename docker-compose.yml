@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.local
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    environment:
+      - ARTICLE_STRATEGY=mercury
+      - SUMMARIZER_STRATEGY=openai
+      - DIFFBOT_TOKEN=your_diffbot_token

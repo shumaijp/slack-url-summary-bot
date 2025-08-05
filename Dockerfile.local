@@ -1,0 +1,18 @@
+# ローカル用 (通常Node.jsイメージ)
+FROM node:20-alpine
+
+# gitをインストール
+RUN apk add --no-cache git
+
+# 作業ディレクトリ
+WORKDIR /app
+
+# パッケージインストール
+COPY package*.json ./
+RUN npm install
+
+# ソースコードコピー
+COPY . .
+
+# エントリーポイント
+CMD ["npm", "start"]
